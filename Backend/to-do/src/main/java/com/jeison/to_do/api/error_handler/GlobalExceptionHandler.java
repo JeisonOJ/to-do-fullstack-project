@@ -3,7 +3,6 @@ package com.jeison.to_do.api.error_handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.jeison.to_do.api.errors.BaseErrorResp;
 import com.jeison.to_do.api.errors.ErrorResp;
+import com.jeison.to_do.utils.exceptions.BadRequestException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
