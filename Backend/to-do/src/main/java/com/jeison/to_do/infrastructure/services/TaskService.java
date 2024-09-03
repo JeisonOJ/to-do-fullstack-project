@@ -1,5 +1,6 @@
 package com.jeison.to_do.infrastructure.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,8 @@ import com.jeison.to_do.domain.entities.Task;
 import com.jeison.to_do.domain.repositories.TaskRepository;
 import com.jeison.to_do.infrastructure.abstract_services.ITaskService;
 import com.jeison.to_do.infrastructure.mappers.TaskMapper;
-import com.jeison.to_do.utils.IdNotFoundException;
+import com.jeison.to_do.utils.exceptions.BadRequestException;
+import com.jeison.to_do.utils.messages.ErrorMessage;
 
 @Service
 public class TaskService implements ITaskService {
@@ -39,8 +41,10 @@ public class TaskService implements ITaskService {
 
     @Override
     public TaskResponse update(Long id, TaskRequest rq) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Task task = findById(id);
+        taskMapper.updateTask(rq, task);
+        task.setUpdatedAt(LocalDateTime.now());
+        return taskMapper.toResponse(taskRepository.save(task));
     }
 
     @Override
@@ -50,7 +54,7 @@ public class TaskService implements ITaskService {
     }
 
     private Task findById(Long id) {
-        return taskRepository.findById(id).orElseThrow(() -> new IdNotFoundException("Task"));
+        return taskRepository.findById(id).orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("Task")));
     }
 
 }
