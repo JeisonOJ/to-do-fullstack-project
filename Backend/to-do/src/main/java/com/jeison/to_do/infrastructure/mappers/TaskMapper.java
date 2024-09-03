@@ -10,7 +10,7 @@ import com.jeison.to_do.api.dto.Request.TaskRequest;
 import com.jeison.to_do.api.dto.Response.TaskResponse;
 import com.jeison.to_do.domain.entities.Task;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TaskMapper {
 
     TaskResponse toResponse(Task task);
