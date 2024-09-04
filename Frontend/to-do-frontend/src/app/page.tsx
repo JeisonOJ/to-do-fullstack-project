@@ -1,8 +1,8 @@
-import "boxicons/css/boxicons.min.css";
-import Tasks from "@/app/components/Tasks";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <Tasks />
-  );
+  redirect("/task-list");
+  // return (
+  //   <></>
+  // );
 }

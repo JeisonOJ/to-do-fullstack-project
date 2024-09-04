@@ -1,22 +1,22 @@
 "use client";
 import { useState } from "react";
 
-const StatusButton = () => {
-  const [completed, setCompleted] = useState(false);
+const StatusButton = ({completed}:{completed:boolean}) => {
+  const [isCompleted, setCompleted] = useState(completed);
 
   const toggleCompleted = () => {
-    setCompleted(!completed);
+    setCompleted(!isCompleted);
   };
   return (
     <button
       onClick={toggleCompleted}
       className={`w-full flex items-center justify-center gap-2 ${
-        completed
+        isCompleted
           ? "text-green-600 hover:text-green-800"
           : "text-gray-400 hover:text-gray-600"
       }`}
     >
-      {completed ? (
+      {isCompleted ? (
         <>
           <i className="bx bxs-check-circle"></i>
           Completed
