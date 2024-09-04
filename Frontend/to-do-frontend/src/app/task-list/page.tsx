@@ -1,5 +1,6 @@
 import TaskList from "@/app/components/TaskList";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata ={
   title: "Task list",
@@ -17,10 +18,10 @@ export default async function Tasks() {
           My Tasks
         </h1>
         <div className="flex justify-between gap-4 mb-8">
-          <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg">
+          <Link href={"/task-list/create"} className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg">
             <i className="bx bx-plus-circle"></i>
             Add new task
-          </button>
+          </Link>
           <button className="flex items-center gap-2 font-bold px-4 py-2 rounded-lg bg-white">
             <i className="bx bx-filter-alt"></i>
             Filter
