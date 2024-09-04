@@ -1,16 +1,22 @@
+'use client';
 import TaskList from "@/app/components/TaskList";
-import { Metadata } from "next";
+import Task from "@/app/models/Task";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export const metadata: Metadata ={
-  title: "Task list",
-  description: "List Task Page",
-  keywords: ["Task list", "task"],
-}
+export default function Tasks() {
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-export default async function Tasks() {
-  const res = await fetch("http://localhost:8080/api/v1/tasks");
-  const data = await res.json();
+  const fetchTasks = async () => {
+    const res = await fetch("http://localhost:8080/api/v1/tasks");
+    const data = await res.json();
+    setTasks(data);
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+  
   return (
     <div className="bg-gradient-to-r from-purple-100 to-pink-100 py-8">
       <div className="container mx-auto p-4 max-w-4xl">
@@ -28,7 +34,7 @@ export default async function Tasks() {
           </button>
         </div>
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <TaskList tasks={data} />
+          <TaskList tasks={tasks} />
         </div>
       </div>
     </div>
