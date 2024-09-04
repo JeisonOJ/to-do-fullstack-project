@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="h-screen w-full flex flex-col  items-center bg-gradient-to-r from-purple-100 to-pink-100 py-8">
+    <main className="w-full flex flex-col  items-center bg-gradient-to-r from-purple-100 to-pink-100 py-8">
       <h1 className="text-9xl font-extrabold text-black tracking-widest">404</h1>
       <div className="bg-purple-600 px-2 text-sm rounded rotate-12 absolute text-white">
         Page Not Found
