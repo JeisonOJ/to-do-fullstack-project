@@ -1,9 +1,11 @@
 package com.jeison.to_do.infrastructure.mappers;
 
+
 import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
@@ -11,7 +13,7 @@ import com.jeison.to_do.api.dto.Request.TaskRequest;
 import com.jeison.to_do.api.dto.Response.TaskResponse;
 import com.jeison.to_do.domain.entities.Task;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface TaskMapper {
 
     TaskResponse toResponse(Task task);
