@@ -21,7 +21,7 @@ export default function TaskList({ tasks, deleteTask }: { tasks: Task[], deleteT
         {tasks.length > 0 ? (
           tasks.map((task) => (
             <tr
-              className="border-b border-gray-200 hover:bg-gray-50"
+              className="border-b border-gray-300 hover:bg-gray-200"
               key={task.id}
             >
               <td className="py-3 px-4">{task.title}</td>
