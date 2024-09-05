@@ -1,8 +1,9 @@
-'use client';
-import Task from "@/app/models/Task";
+"use client";
 import StatusButton from "@/app/components/StatusButton";
+import Task from "@/app/models/Task";
 
-export default function TaskList({ tasks }: { tasks: Task[] }) {
+export default function TaskList({ tasks, deleteTask }: { tasks: Task[], deleteTask: (id: number) => void }) {
+  
   return (
     <table className="w-full">
       <thead className="bg-purple-600 text-white">
@@ -16,27 +17,41 @@ export default function TaskList({ tasks }: { tasks: Task[] }) {
         </tr>
       </thead>
       <tbody>
-        {tasks.map((task) => (
-          <tr className="border-b border-gray-200 hover:bg-gray-50" key={task.id}>
-            <td className="py-3 px-4">{task.title}</td>
-            <td className="py-3 px-4">{task.description}</td>
-            <td className="py-3 px-4">{task.createdAt}</td>
-            <td className="py-3 px-4">{task.updatedAt}</td>
-            <td className="py-3 px-4">
-              <div className="flex justify-evenly gap-2">
-                <button className="text-blue-600 hover:text-blue-800">
-                  <i className="bx bx-edit text-2xl"></i>
-                </button>
-                <button className="text-red-600 hover:text-red-800">
-                  <i className="bx bxs-trash text-2xl"></i>
-                </button>
-              </div>
-            </td>
-            <td className="py-3 px-4">
-              <StatusButton completed={task.completed} />
+        {tasks.length > 0 ? (
+          tasks.map((task) => (
+            <tr
+              className="border-b border-gray-200 hover:bg-gray-50"
+              key={task.id}
+            >
+              <td className="py-3 px-4">{task.title}</td>
+              <td className="py-3 px-4">{task.description}</td>
+              <td className="py-3 px-4">{task.createdAt}</td>
+              <td className="py-3 px-4">{task.updatedAt}</td>
+              <td className="py-3 px-4">
+                <div className="flex justify-evenly gap-2">
+                  <button className="text-blue-600 hover:text-blue-800">
+                    <i className="bx bx-edit text-2xl"></i>
+                  </button>
+                  <button
+                    onClick={() => deleteTask(task.id)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    <i className="bx bxs-trash text-2xl"></i>
+                  </button>
+                </div>
+              </td>
+              <td className="py-3 px-4">
+                <StatusButton completed={task.completed} />
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan={6} className="text-center py-4">
+              No tasks available
             </td>
           </tr>
-        ))}
+        )}
       </tbody>
     </table>
   );

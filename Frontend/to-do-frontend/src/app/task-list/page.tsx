@@ -13,6 +13,13 @@ export default function Tasks() {
     setTasks(data);
   };
 
+  const deleteTask = async (id: number) => {
+    await fetch(`http://localhost:8080/api/v1/tasks/${id}`, {
+      method: "DELETE",
+    });
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -34,7 +41,7 @@ export default function Tasks() {
           </button>
         </div>
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks} deleteTask={deleteTask} />
         </div>
       </div>
     </div>
