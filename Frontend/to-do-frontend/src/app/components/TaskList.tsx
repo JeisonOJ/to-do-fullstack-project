@@ -1,6 +1,7 @@
 "use client";
 import StatusButton from "@/app/components/StatusButton";
 import Task from "@/app/models/Task";
+import Link from "next/link";
 
 export default function TaskList({ tasks, deleteTask }: { tasks: Task[], deleteTask: (id: number) => void }) {
   
@@ -29,9 +30,9 @@ export default function TaskList({ tasks, deleteTask }: { tasks: Task[], deleteT
               <td className="py-3 px-4">{task.updatedAt}</td>
               <td className="py-3 px-4">
                 <div className="flex justify-evenly gap-2">
-                  <button className="text-blue-600 hover:text-blue-800">
+                  <Link href={`/task-list/edit/${task.id}`} className="text-blue-600 hover:text-blue-800">
                     <i className="bx bx-edit text-2xl"></i>
-                  </button>
+                  </Link>
                   <button
                     onClick={() => deleteTask(task.id)}
                     className="text-red-600 hover:text-red-800"
