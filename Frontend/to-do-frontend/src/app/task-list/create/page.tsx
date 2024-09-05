@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function Create() {
@@ -9,17 +10,20 @@ export default function Create() {
     description: "",
   });
 
+  const router = useRouter();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formState);
     console.log(e.target);
-    await fetch("http://localhost:8080/api/v1/tasks", {
+    const response = await fetch("http://localhost:8080/api/v1/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formState),
     });
+    if (response.ok) router.push("/task-list");
   };
 
   return (
@@ -46,7 +50,9 @@ export default function Create() {
               id="title"
               value={formState.title}
               name="title"
-              onChange={(e) => setFormState({...formState, title: e.target.value})}
+              onChange={(e) =>
+                setFormState({ ...formState, title: e.target.value })
+              }
               placeholder="Type the title of the task"
               required
               className="w-full"
@@ -63,7 +69,9 @@ export default function Create() {
               id="description"
               value={formState.description}
               name="description"
-              onChange={(e) => setFormState({...formState, description: e.target.value})}
+              onChange={(e) =>
+                setFormState({ ...formState, description: e.target.value })
+              }
               placeholder="Type the description of the task"
               rows={4}
               className="w-full"
