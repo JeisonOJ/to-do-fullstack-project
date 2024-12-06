@@ -3,18 +3,19 @@ import TaskList from "@/app/components/TaskList";
 import Task from "@/app/models/Task";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { API_URL } from "@/app/constants/constants";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:8080/api/v1/tasks");
+    const res = await fetch(API_URL);
     const data = await res.json();
     setTasks(data);
   };
 
   const deleteTask = async (id: number) => {
-    await fetch(`http://localhost:8080/api/v1/tasks/${id}`, {
+    await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
     });
     setTasks(tasks.filter((task) => task.id !== id));

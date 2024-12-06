@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import { API_URL } from "@/app/constants/constants";
 
 export default function Edit() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ export default function Edit() {
 
   useEffect(() => {
     const fetchTask = async () => {
-      const response = await fetch(`http://localhost:8080/api/v1/tasks/${id}`);
+      const response = await fetch(`${API_URL}/${id}`);
       // if(!response.ok) notFound();
 
       const data = await response.json();
@@ -34,7 +35,7 @@ export default function Edit() {
     e.preventDefault();
     console.log(formState);
     console.log(e.target);
-    const response = await fetch(`http://localhost:8080/api/v1/tasks/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
