@@ -1,4 +1,4 @@
-FROM maven:3.8.7-openjdk-17 AS build
+FROM eclipse-temurin:17-jdk as builder
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
